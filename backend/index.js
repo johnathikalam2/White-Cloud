@@ -2,6 +2,7 @@ const port = 4001;
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
+const path = require('path');
 const mongoose = require('mongoose');
 const Item = require('./models/item');
 const Invoice = require('./models/invoice');
@@ -24,7 +25,9 @@ mongoose.connect("mongodb+srv://johnathikalam:bKKjhjvcxEZ5H60q@cluster0.my87tnj.
 })
 
 app.get("/",(req,res)=>{
-    res.send("Express app is running")
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
 })
 
 app.get('/items', async (req, res) => {

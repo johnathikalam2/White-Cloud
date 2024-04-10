@@ -9,7 +9,7 @@ const ItemSchema = new mongoose.Schema({
   item_mrp: Number,
   offer_price: Number,
   discount: Number,
-  item_catogory: String,
+  item_catogory: [{ type: String }],
   item_tags: String,
   instock_outstock_indication: String,
   stock_quantity: Number,

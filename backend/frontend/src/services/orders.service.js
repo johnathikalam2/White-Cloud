@@ -4,7 +4,7 @@ import call from './Call';
 class OrdersService {
     getList() {
         const Orders = call({
-            path:"/orders",
+            path:"/order",
             method:"GET"
         })
         return {

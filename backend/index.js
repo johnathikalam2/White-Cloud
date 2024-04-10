@@ -29,6 +29,52 @@ app.get("/",(req,res)=>{
   res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
     //res.send("Express app is running")
 })
+app.get("/signin",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
+})
+app.get("/profile",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
+})
+app.get("/banner",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
+})
+app.get("/banner/add",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
+})
+app.get("/previous-orders",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
+})
+app.get("/in-store-billing",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
+})
+app.get("/orders",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
+})
+app.get("/add-item",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
+})
+app.get("/add-item/:id",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    //res.send("Express app is running")
+})
+
 
 app.get('/items', async (req, res) => {
   try {
@@ -285,7 +331,7 @@ app.post('/orderStore', upload.none(), async (req, res) => {
 
 
 
-  app.get('/orders', async (req, res) => {
+  app.get('/order', async (req, res) => {
     try {
       const invoices = await Invoice.find({});
   

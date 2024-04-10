@@ -39,11 +39,14 @@ const __handleSubmit = async (e) => {
             localStorage.setData('user-info', { name: 'Testing user' });
             navigate('/');
         } else {
-            
-            alert('Login failed. Please check your credentials.');
+            if (response.data.message === 'Invalid password') {
+                console.error('Invalid password. Please recheck your password.');
+            } else {
+                console.error('Login failed. Please check your credentials.');
+            }
         }
     } catch (error) {
-        alert('An error occurred during login:', error);
+        console.error('An error occurred during login:', error);
     }
 };
 

@@ -40,7 +40,7 @@ const __handleSubmit = async (e) => {
             navigate('/');
         } else {
             
-            console.error('Login failed. Please check your credentials.');
+            alert('Login failed. Please check your credentials.');
         }
     } catch (error) {
         console.error('An error occurred during login:', error);

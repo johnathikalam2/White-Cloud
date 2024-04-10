@@ -43,7 +43,7 @@ const __handleSubmit = async (e) => {
             alert('Login failed. Please check your credentials.');
         }
     } catch (error) {
-        console.error('An error occurred during login:', error);
+        alert('An error occurred during login:', error);
     }
 };
 

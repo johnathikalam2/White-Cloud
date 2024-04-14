@@ -13,7 +13,8 @@ const ItemAdd = () => {
     const [items, setItems] = useState([]);
     const existingItemCodes = items.map(item => item.item_code);
     const [stockIndicater,setStockIndicater]=useState('')
-    const [mesuring_Qntty,setMesuring_Qntty]=useState('')
+    //const [mesuring_Qntty,setMesuring_Qntty]=useState('')
+    const [mesuring_Qntty,setMesuring_Qntty]=useState('Number')
     const [category,setCategory]=useState('')
     const [tag,settag]=useState('')
     const [type,settype]=useState('')
@@ -218,7 +219,7 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                 </InputGroup>
                             </Form.Group>
                         </Col>
-                        <Col md={6}>
+                        {/*<Col md={6}>
                             <Form.Group className="mb-3" controlId="validationCustom01">
                                 <Form.Label className='text-white fw-semibold'>Mesuring qntty</Form.Label>
                                 <select value={mesuring_Qntty} className="form-select form-control" onChange={(e) => setMesuring_Qntty(e.target.value)} >
@@ -228,14 +229,14 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                     <option value="liter" >Liter</option>
                                     <option value="gram" >Gram</option>
                                 </select>
-                                {/* <InputGroup hasValidation>
+                                { <InputGroup hasValidation>
                                     <Form.Control type="number" placeholder="Enter mesuring qntty" name="mesuring_qntty" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' required/>
                                     <Form.Control.Feedback type="invalid" style={{fontSize:"20px"}}>
                                             Mesuring qntty is required.
                                     </Form.Control.Feedback>
-                                </InputGroup> */}
+                                </InputGroup> }
                             </Form.Group>
-                        </Col>
+                        </Col>*/}
                         <Col md={6}>
                             <Form.Group className="mb-3" controlId="validationCustom01">
                                 <Form.Label className='text-white fw-semibold'>Item price</Form.Label>

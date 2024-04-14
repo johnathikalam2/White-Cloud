@@ -130,7 +130,8 @@ export const Item = () => {
         formData.id=id;
         formData.append("item_code", formFields?.item_code);
         formData.append("item_name", formFields?.item_name);
-        formData.append("mesuring_qntty", formFields?.mesuring_qntty);
+        //formData.append("mesuring_qntty", formFields?.mesuring_qntty);
+        formData.append("mesuring_qntty", "Number");
         formData.append("item_mrp", formFields.item_mrp);
         formData.append("offer_price", formFields.offer_price);
         formData.append("discount",formFields.discount)

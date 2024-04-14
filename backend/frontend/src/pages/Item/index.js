@@ -31,7 +31,7 @@ export const Item = () => {
         //"item_catogory": '', 
         "item_catogory": [], 
         "item_tags": '',
-        "item_type": '',
+        //"item_type": '',
         "item_hsb": '',
         "instock_outstock_indication": '',
         "stock_quantity": '',
@@ -49,6 +49,9 @@ export const Item = () => {
         {label:'Chips & Snacks',value:'Chips & Snacks'},
         {label:'Cosmetics',value:'Cosmetics'},
         {label:'Detergents',value:'Detergents'},
+        {label:'School Corner',value:'School Corner'},
+        {label:'Prayer Corner',value:'Prayer Corner'},
+        {label:'Miscellaneous',value:'Miscellaneous'},
     ]
     const tagsData = [
         {label:'Soaps & Shampoo',value:'Soaps & Shampoo'},
@@ -138,7 +141,7 @@ export const Item = () => {
         //formData.append("item_catogory", formFields.item_catogory);   
         formData.append("item_catogory", formFields.item_catogory.join('-'));
         formData.append("item_tags", formFields.item_tags);
-        formData.append("item_type", formFields.item_type);
+        //formData.append("item_type", formFields.item_type);
         formData.append("item_hsb", formFields.item_hsb);
         formData.append("stock_quantity", formFields.stock_quantity);
         formData.append("item_discription", formFields.item_discription);
@@ -200,7 +203,7 @@ export const Item = () => {
                                                     <Form.Control type="text" placeholder="Enter item name" name="item_name" onChange={(e) => __changeInputFields(e)} value={formFields.item_name} className='fw-semibold' />
                                                 </Form.Group>
                                             </Col>
-                                            <Col md={6}>
+                                            {/*<Col md={6}>
                                                 <Form.Group className="mb-3">
                                                     <Form.Label className='text-white fw-semibold'>Mesuring qntty</Form.Label>
                                                     <select className="form-select form-control" name='mesuring_qntty' value={formFields.mesuring_qntty}  onChange={(e) => __changeInputFields(e)} >
@@ -211,7 +214,7 @@ export const Item = () => {
                                                         <option value="gram" >Gram</option>
                                                     </select>
                                                 </Form.Group>
-                                            </Col>
+                                        </Col>*/}
                                             <Col md={6}>
                                                 <Form.Group className="mb-3">
                                                     <Form.Label className='text-white fw-semibold'>Item MRP</Form.Label>
@@ -259,7 +262,7 @@ export const Item = () => {
                                                 </Form.Group>
                                             </Col>
 
-                                            <Col md={6}>
+                                            {/*<Col md={6}>
                                                 <Form.Group className="mb-3">
                                                     <Form.Label className='text-white fw-semibold'>Item type</Form.Label>
                                                     <select value={formFields.item_type} name='item_type' className="form-select form-control" onChange={(e) => __changeInputFields(e)} >
@@ -271,7 +274,7 @@ export const Item = () => {
                                                         }
                                                     </select>
                                                 </Form.Group>
-                                            </Col>
+                                                    </Col>*/}
 
                                             <Col md={6}>
                                                 <Form.Group className="mb-3">

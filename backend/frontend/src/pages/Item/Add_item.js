@@ -17,7 +17,7 @@ const ItemAdd = () => {
     const [mesuring_Qntty,setMesuring_Qntty]=useState('Number')
     const [category,setCategory]=useState('')
     const [tag,settag]=useState('')
-    const [type,settype]=useState('')
+    //const [type,settype]=useState('')
     const [validated, setValidated] = useState(false);
     const [file,setFile] = useState('')
     const [preview,setPreview] = useState('')
@@ -32,7 +32,7 @@ const ItemAdd = () => {
         "discount": '',
         "item_catogory": '',
         "item_tags": '',
-        "item_type": '',
+        //"item_type": '',
         "item_hsb": '',
         "instock_outstock_indication": '',
         "stock_quantity": '',
@@ -56,6 +56,9 @@ const ItemAdd = () => {
         {label:'Chips & Snacks',value:'Chips & Snacks'},
         {label:'Cosmetics',value:'Cosmetics'},
         {label:'Detergents',value:'Detergents'},
+        {label:'School Corner',value:'School Corner'},
+        {label:'Prayer Corner',value:'Prayer Corner'},
+        {label:'Miscellaneous',value:'Miscellaneous'},
     ]
     const tagsData = [
         {label:'Soaps & Shampoo',value:'Soaps & Shampoo'},
@@ -152,7 +155,7 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
         console.log(categoryString);
         formData.append("item_catogory", categoryString);
         formData.append("item_tags", tag);
-        formData.append("item_type", type);
+        //formData.append("item_type", type);
         formData.append("instock_outstock_indication", stockIndicater);
         formData.append("stock_quantity", formFields.stock_quantity);
         formData.append("item_discription", formFields.item_discription);
@@ -297,15 +300,15 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                             </Form.Group>
                         </Col>
 
-                        <Col md={6}>
+                        {/*<Col md={6}>
                             <Form.Group className="mb-3" controlId="validationCustom01">
                                 <Form.Label className='text-white fw-semibold'>Item type</Form.Label>
-                                {/* <InputGroup hasValidation>
+                                 <InputGroup hasValidation>
                                     <Form.Control type="text" placeholder="Enter item category" name="item_catogory" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' required/>
                                     <Form.Control.Feedback type="invalid" style={{fontSize:"20px"}}>
                                             Item category is required.
                                     </Form.Control.Feedback>
-                                </InputGroup> */}
+                                </InputGroup> 
                                 <select value={type} className="form-select form-control" onChange={(e) => settype(e.target.value)} >
                                     <option value='' disabled="disabled">Item type</option>
                                     {
@@ -314,12 +317,9 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                          })
                                     }
                                 </select>
-                                 {/* <Select 
-                                    isMulti
-                                    options={CategoryData} 
-                                /> */}
+                        
                             </Form.Group>
-                        </Col>
+                        </Col>*/}
                         {/*<Col md={6}>
                             <Form.Group className="mb-3" controlId="validationCustom01">
                                 <Form.Label className='text-white fw-semibold'>Item tags</Form.Label>

@@ -171,7 +171,7 @@ export const Stock = () => {
                                                                                 <div className="product_img">
                                                                                     {(item.item_image) ? (<img src={`data:image/jpeg;base64,${item.item_image}`}   alt='productimg' />):(<img src={VegitablesThree} alt='productimg' />) }
                                                                                 </div>
-                                                                                <p className="price">{item.item_mrp}/-</p>
+                                                                                <p className="price">{item.offer_price}/-</p>
                                                                                 <h2>{item.item_name.length > 0 ? item.item_name : 'Item name'}</h2>
                                                                                 <p className="item_code">{item.item_code}</p>
                                                                             </div>

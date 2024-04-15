@@ -126,6 +126,10 @@ export const Item = () => {
         setHasbPreview(URL.createObjectURL(e.target.files[0]))
     }
 
+    const itemMrp = parseFloat(formFields.item_mrp);
+    const offerPrice = parseFloat(formFields.offer_price);
+    const discount = ((itemMrp - offerPrice) / itemMrp) * 100;
+
     const __handleSubmit = (e) => {
         e.preventDefault();
 
@@ -135,9 +139,11 @@ export const Item = () => {
         formData.append("item_name", formFields?.item_name);
         //formData.append("mesuring_qntty", formFields?.mesuring_qntty);
         formData.append("mesuring_qntty", "Number");
-        formData.append("item_mrp", formFields.item_mrp);
-        formData.append("offer_price", formFields.offer_price);
-        formData.append("discount",formFields.discount)
+        //formData.append("item_mrp", formFields.item_mrp);
+        //formData.append("offer_price", formFields.offer_price);
+        formData.append("item_mrp", parseFloat(formFields.item_mrp).toFixed(2));
+        formData.append("offer_price", parseFloat(formFields.offer_price).toFixed(2));
+        formData.append("discount",Math.ceil(discount));
         //formData.append("item_catogory", formFields.item_catogory);   
         formData.append("item_catogory", formFields.item_catogory.join('-'));
         formData.append("item_tags", formFields.item_tags);
@@ -227,12 +233,12 @@ export const Item = () => {
                                                     <Form.Control type="number" placeholder="Enter offer price" name="offer_price" onChange={(e) => __changeInputFields(e)} value={formFields.offer_price} className='fw-semibold' />
                                                 </Form.Group>
                                             </Col>
-                                            <Col md={6}>
+                                            {/*<Col md={6}>
                                                 <Form.Group className="mb-3">
                                                     <Form.Label className='text-white fw-semibold'>Offer Percentage</Form.Label>
                                                     <Form.Control type="number" placeholder="Enter offer Percentage" name="discount" onChange={(e) => __changeInputFields(e)} value={formFields.discount} className='fw-semibold' />
                                                 </Form.Group>
-                                            </Col>
+                                    </Col>*/}
                                             <Col md={6}>
                                                 <Form.Group className="mb-3">
                                                     <Form.Label className='text-white fw-semibold'>Item category</Form.Label>

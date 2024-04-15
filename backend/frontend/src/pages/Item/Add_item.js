@@ -142,9 +142,14 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
         formData.append("item_code", itemCode);
         formData.append("item_name", formFields?.item_name);
         formData.append("mesuring_qntty", mesuring_Qntty);
-        formData.append("item_mrp", formFields.item_mrp);
-        formData.append("offer_price", formFields.offer_price);
-        formData.append("discount", formFields.discount);
+        //formData.append("item_mrp", formFields.item_mrp);
+        //formData.append("offer_price", formFields.offer_price);
+        formData.append("item_mrp", parseFloat(formFields.item_mrp).toFixed(2));
+        formData.append("offer_price", parseFloat(formFields.offer_price).toFixed(2));
+        const itemMrp = parseFloat(formFields.item_mrp);
+        const offerPrice = parseFloat(formFields.offer_price);
+        const discount = ((itemMrp - offerPrice) / itemMrp) * 100;
+        formData.append("discount", Math.ceil(discount));
         //formData.append("item_catogory", category);
         console.log(category)
         //const categoryArray = category.map(c => c.value)
@@ -257,12 +262,12 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                 <Form.Control type="number" placeholder="Enter offer price" name="offer_price" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' />
                             </Form.Group>
                         </Col>
-                        { <Col md={6}>
+                        {/* <Col md={6}>
                             <Form.Group className="mb-3">
                                 <Form.Label className='text-white fw-semibold'>Offer Percentage</Form.Label>
                                 <Form.Control type="number" step="0.01" placeholder="Enter offer percentage" name="discount" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' />
                             </Form.Group>
-                        </Col> }
+                    </Col> */}
                         
                         <Col md={6}>
                         <Form.Group className="mb-3" controlId="validationCustom01">

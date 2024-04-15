@@ -19,7 +19,8 @@ app.use(express.json());
 
 //mongoose.connect("mongodb+srv://ebinjomonkottakal:fwscJgpQGiEp8amb@cluster0.iekhyww.mongodb.net/ecommerce").then(()=>{
 console.log("Connected to MongoDB");
-mongoose.connect("mongodb+srv://johnathikalam:bKKjhjvcxEZ5H60q@cluster0.my87tnj.mongodb.net/store_billing").then(()=>{
+//mongoose.connect("mongodb+srv://johnathikalam:bKKjhjvcxEZ5H60q@cluster0.my87tnj.mongodb.net/store_billing").then(()=>{
+mongoose.connect("mongodb+srv://wcloudsupermarket:UibdwePbFthz8Hes@cluster0.s4bulfq.mongodb.net/Whitesupermarket").then(()=>{
 }).catch((error)=>{
   console.log("Mongoose Error : "+error);
 })

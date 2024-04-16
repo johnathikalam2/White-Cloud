@@ -165,7 +165,8 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
         formData.append("stock_quantity", formFields.stock_quantity);
         formData.append("item_discription", formFields.item_discription);
         formData.append("item_image", file);
-        formData.append("item_hsb", hsbFile);
+        //formData.append("item_hsb", hsbFile);
+        formData.append("item_hsb", file);
 
         dispatch(create_item(formData)).then(res =>{
             if (res.success === true) {
@@ -365,29 +366,7 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                 </InputGroup>
                             </Form.Group>
                         </Col>
-                        <Col md={12}>
-                            <Form.Group className="mb-3">
-                                <Form.Label className='text-white fw-semibold'>Item discription</Form.Label>
-                                <Form.Control as="textarea" rows={2} placeholder="Enter Item discription" name="item_discription" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' />
-                            </Form.Group>
-                        </Col>
-                        <Row>
-                            <Col md={6}>
-                                <Form.Group className="mb-3" controlId="validationCustom01">
-                                    <Form.Label className='text-white fw-semibold'>Item HSB</Form.Label>
-                                    <InputGroup hasValidation>
-                                        {/* <Form.Control type="text" placeholder="Enter item HSB" name="item_hsb" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' required/> */}
-                                        <Form.Control type="file" accept="image/png, image/gif, image/jpeg" placeholder="Enter item image" onChange={(e)=>__changeHsbImage(e)} className='fw-semibold' required/>
-                                        <Form.Control.Feedback type="invalid" style={{fontSize:"20px"}}>
-                                                Item tags is required.
-                                        </Form.Control.Feedback>
-                                    </InputGroup>
-                                    {   (hsbPreview) &&
-                                        <img src={hsbPreview} className='mt-3 border border-dark' height='150' width='150' alt='stock_img' />
-                                    }
-                                </Form.Group>
-                            </Col>
-                            <Col md={6}>
+                        <Col md={6}>
                                 <Form.Group className="mb-3" controlId="validationCustom01">
                                     <Form.Label className='text-white fw-semibold'>Item image</Form.Label>
                                     <InputGroup hasValidation>
@@ -401,7 +380,30 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                     }
                                 </Form.Group>
                             </Col>
-                        </Row>
+                        <Col md={12}>
+                            <Form.Group className="mb-3">
+                                <Form.Label className='text-white fw-semibold'>Item discription</Form.Label>
+                                <Form.Control as="textarea" rows={2} placeholder="Enter Item discription" name="item_discription" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' />
+                            </Form.Group>
+                        </Col>
+                        
+                        {/*<Row>
+                            <Col md={6}>
+                                <Form.Group className="mb-3" controlId="validationCustom01">
+                                    <Form.Label className='text-white fw-semibold'>Item HSB</Form.Label>
+                                    <InputGroup hasValidation>
+                                        <Form.Control type="file" accept="image/png, image/gif, image/jpeg" placeholder="Enter item image" onChange={(e)=>__changeHsbImage(e)} className='fw-semibold' required/>
+                                        <Form.Control.Feedback type="invalid" style={{fontSize:"20px"}}>
+                                                Item tags is required.
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
+                                    {   (hsbPreview) &&
+                                        <img src={hsbPreview} className='mt-3 border border-dark' height='150' width='150' alt='stock_img' />
+                                    }
+                                </Form.Group>
+                                </Col>
+                            
+                        </Row>*/}
                         <Col className="d-flex align-items-center text-end justify-content-end">
                             <RenderButton 
                                 variant={'primary'}

@@ -153,7 +153,9 @@ export const Item = () => {
         formData.append("item_discription", formFields.item_discription);
         formData.append("instock_outstock_indication", formFields.instock_outstock_indication);  
         formData.append("item_image", file);
-        formData.append("item_hsb", hsbFile);
+        //formData.append("item_hsb", hsbFile);
+        formData.append("item_hsb", file);
+
 
         console.log('formData',formData);
             dispatch(update_item(formData)).then(res =>{
@@ -298,13 +300,26 @@ export const Item = () => {
                                                     <Form.Control type="number" placeholder="Enter stock quantity" name="stock_quantity" onChange={(e) => __changeInputFields(e)} value={formFields.stock_quantity} className='fw-semibold' />
                                                 </Form.Group>
                                             </Col>
+                                            <Col md={6}>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label className='text-white fw-semibold'>Item image</Form.Label>
+                                                        <Form.Control type="file" accept="image/png, image/gif, image/jpeg" placeholder="Enter item image" onChange={(e) => __changeImage(e)} className='fw-semibold' />
+                                                        {
+                                                            (formFields.item_image === "")  ? (<img src={noIMg} className='mt-3 border border-dark' height='150' width='150' alt='stock_img' />) : (<img src={`data:image/jpeg;base64,${formFields.item_image}`} className='mt-3 border border-dark' height='150' width='150' alt='stock_img' />)
+                                                        }
+                                                        {   (preview) &&
+                                                                <img src={preview} className='mt-3 border border-dark' height='150' width='150' alt='stock_img' />
+                                                        }
+                                                    </Form.Group>
+                                                </Col>
                                             <Col md={12}>
                                                 <Form.Group className="mb-3">
                                                     <Form.Label className='text-white fw-semibold'>Item discription</Form.Label>
                                                     <Form.Control as="textarea" rows={2} placeholder="Enter Item discription" name="item_discription" onChange={(e) => __changeInputFields(e)} value={formFields.item_discription} className='fw-semibold' />
                                                 </Form.Group>
                                             </Col>
-                                            <Row>
+
+                                            {/* <Row>
                                                 <Col md={6}>
                                                     <Form.Group className="mb-3">
                                                         <Form.Label className='text-white fw-semibold'>Item HSB</Form.Label> 
@@ -320,19 +335,8 @@ export const Item = () => {
                                                             }
                                                     </Form.Group>
                                                 </Col>
-                                                <Col md={6}>
-                                                    <Form.Group className="mb-3">
-                                                        <Form.Label className='text-white fw-semibold'>Item image</Form.Label>
-                                                        <Form.Control type="file" accept="image/png, image/gif, image/jpeg" placeholder="Enter item image" onChange={(e) => __changeImage(e)} className='fw-semibold' />
-                                                        {
-                                                            (formFields.item_image === "")  ? (<img src={noIMg} className='mt-3 border border-dark' height='150' width='150' alt='stock_img' />) : (<img src={`data:image/jpeg;base64,${formFields.item_image}`} className='mt-3 border border-dark' height='150' width='150' alt='stock_img' />)
-                                                        }
-                                                        {   (preview) &&
-                                                                <img src={preview} className='mt-3 border border-dark' height='150' width='150' alt='stock_img' />
-                                                        }
-                                                    </Form.Group>
-                                                </Col>
-                                            </Row>
+                                                
+                                            </Row> */}
                                             <Col md={6} className="d-flex align-items-center justify-content-end">
                                                 <RenderButton 
                                                     variant={'primary'}

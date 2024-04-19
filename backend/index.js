@@ -148,9 +148,11 @@ app.post('/itemUpdate/:id', upload.fields([{ name: 'item_image', maxCount: 1 }, 
     const id = req.params.id;
     const newdata = req.body;
     const categoryArray = newdata.item_catogory.split('-').map(category => category.trim());
+    const tagArray = newdata.item_tags.split('-').map(tag => tag.trim());
     const newData = {
       ...newdata,
-      item_catogory: categoryArray, 
+      item_catogory: categoryArray,
+      item_tags: tagArray,
       updated_at: Date.now()
     };
 
@@ -202,6 +204,7 @@ app.post('/itemStore', upload.fields([{ name: 'item_image', maxCount: 1 }, { nam
 
   // Split the item_tags string into an array of tags
   const categoryArray = itemData.item_catogory.split('-').map(category => category.trim());
+  const tagArray = itemData.item_tags.split('-').map(tag => tag.trim());
 
   if (!itemImage || !itemHsb) {
     return res.status(400).send({ success: false, error: "Please fill in all required fields." });
@@ -211,7 +214,8 @@ app.post('/itemStore', upload.fields([{ name: 'item_image', maxCount: 1 }, { nam
       ...itemData,
       item_image: itemImage,
       item_hsb: itemHsb,
-      item_catogory: categoryArray,       // Representing item tags as a list of strings
+      item_catogory: categoryArray, 
+      item_tags: tagArray,       
     });
     console.log(`Item: ${item}`);
 

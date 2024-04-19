@@ -39,12 +39,6 @@ const ItemAdd = () => {
         "item_discription": ''
     })
 
-    const TypeData = [
-        {label:'School Corner',value:'School Corner'},
-        {label:'Prayer Corner',value:'Prayer Corner'},
-        {label:'Miscellaneous',value:'Miscellaneous'},
-        
-    ]
 
     const CategoryData = [
         {label:'Rice & Grains',value:'Rice & Grains'},
@@ -151,15 +145,22 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
         const discount = ((itemMrp - offerPrice) / itemMrp) * 100;
         formData.append("discount", Math.ceil(discount));
         //formData.append("item_catogory", category);
-        console.log(category)
         //const categoryArray = category.map(c => c.value)
         //const categoryList = categoryArray.map(category => category.trim());
+        console.log(category)
         const categoryArray = category.map(c => c.value);
         const categoryList = categoryArray.map(category => category.trim());
         const categoryString = categoryList.join('-');
         console.log(categoryString);
         formData.append("item_catogory", categoryString);
-        formData.append("item_tags", tag);
+
+        console.log(tag)
+        const tagArray = tag.map(c => c.value);
+        const tagList = tagArray.map(tag => tag.trim());
+        const tagString = tagList.join('-');
+        console.log(tagString);
+        formData.append("item_tags", tagString);
+        //formData.append("item_tags", tag);
         //formData.append("item_type", type);
         formData.append("instock_outstock_indication", stockIndicater);
         formData.append("stock_quantity", formFields.stock_quantity);
@@ -283,14 +284,20 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                         </Col>
 
                         <Col md={6}>
+                        <Form.Group className="mb-3" controlId="validationCustom01">
+                            <Form.Label className='text-white fw-semibold'>Item tag</Form.Label>
+                        <Select 
+                                isMulti
+                                options={tagsData}
+                                value={tag}
+                                onChange={(selected) => settag(selected)}
+                                />
+                            </Form.Group>
+                        </Col>
+
+                        {/*<Col md={6}>
                             <Form.Group className="mb-3" controlId="validationCustom01">
                                 <Form.Label className='text-white fw-semibold'>Item tag</Form.Label>
-                                {/* <InputGroup hasValidation>
-                                    <Form.Control type="text" placeholder="Enter item category" name="item_catogory" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' required/>
-                                    <Form.Control.Feedback type="invalid" style={{fontSize:"20px"}}>
-                                            Item category is required.
-                                    </Form.Control.Feedback>
-                                </InputGroup> */}
                                 <select value={tag} className="form-select form-control" onChange={(e) => settag(e.target.value)} >
                                     <option value='' disabled="disabled">Item tag</option>
                                     {
@@ -299,12 +306,8 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                          })
                                     }
                                 </select>
-                                 {/* <Select 
-                                    isMulti
-                                    options={CategoryData} 
-                                /> */}
                             </Form.Group>
-                        </Col>
+                                </Col>*/}
 
                         {/*<Col md={6}>
                             <Form.Group className="mb-3" controlId="validationCustom01">

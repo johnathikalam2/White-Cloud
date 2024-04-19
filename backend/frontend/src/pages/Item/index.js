@@ -11,12 +11,7 @@ import Select from 'react-select';
 
 export const Item = () => {
     // const [category,setCategory]=useState('')
-    const TypeData = [
-        {label:'School Corner',value:'School Corner'},
-        {label:'Prayer Corner',value:'Prayer Corner'},
-        {label:'Miscellaneous',value:'Miscellaneous'},
-        
-    ]
+    
 
     const [file,setFile] = useState('')
     const [preview,setPreview] = useState('')
@@ -30,7 +25,8 @@ export const Item = () => {
         "discount":'',
         //"item_catogory": '', 
         "item_catogory": [], 
-        "item_tags": '',
+        "item_tags": [], 
+       // "item_tags": '',
         //"item_type": '',
         "item_hsb": '',
         "instock_outstock_indication": '',
@@ -111,7 +107,17 @@ export const Item = () => {
                 return {...prevState, item_catogory: [...prevState.item_catogory, e.target.value]}
             }
         });
-    } else {
+    } 
+    if (e.target.name === 'item_tags') {
+        setFormFields(prevState => {
+            if (prevState.item_tags.includes(e.target.value)) {
+                return {...prevState, item_tags: prevState.item_tags.filter(tag => tag !== e.target.value)}
+            } else {
+                return {...prevState, item_tags: [...prevState.item_tags, e.target.value]}
+            }
+        });
+    }
+    else {
         setFormFields({...formFields,[e.target.name]: e.target.value})
     }
 }
@@ -146,7 +152,8 @@ export const Item = () => {
         formData.append("discount",Math.ceil(discount));
         //formData.append("item_catogory", formFields.item_catogory);   
         formData.append("item_catogory", formFields.item_catogory.join('-'));
-        formData.append("item_tags", formFields.item_tags);
+        formData.append("item_tags", formFields.item_tags.join('-'));
+        //formData.append("item_tags", formFields.item_tags);
         //formData.append("item_type", formFields.item_type);
         formData.append("item_hsb", formFields.item_hsb);
         formData.append("stock_quantity", formFields.stock_quantity);
@@ -259,6 +266,21 @@ export const Item = () => {
                                             <Col md={6}>
                                                 <Form.Group className="mb-3">
                                                     <Form.Label className='text-white fw-semibold'>Item tag</Form.Label>
+                                                    <Select
+                                                        isMulti
+                                                        name="item_tags"
+                                                        options={tagsData}
+                                                        className="basic-multi-select"
+                                                        classNamePrefix="select"
+                                                        onChange={(selected) => setFormFields({...formFields, item_tags: selected.map(x => x.value)})}
+                                                        value={formFields.item_tags.map(item => ({ label: item, value: item }))}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+
+                                           {/* <Col md={6}>
+                                                <Form.Group className="mb-3">
+                                                    <Form.Label className='text-white fw-semibold'>Item tag</Form.Label>
                                                     <select value={formFields.item_tags} name='item_tags' className="form-select form-control" onChange={(e) => __changeInputFields(e)} >
                                                         <option value='' disabled="disabled">Item tag</option>
                                                         {
@@ -268,7 +290,7 @@ export const Item = () => {
                                                         }
                                                     </select>
                                                 </Form.Group>
-                                            </Col>
+                                                    </Col>*/}
 
                                             {/*<Col md={6}>
                                                 <Form.Group className="mb-3">

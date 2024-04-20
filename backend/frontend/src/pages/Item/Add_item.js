@@ -200,9 +200,17 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                 <div className="card-body">
                   <Row>
                     <Col md={12}>
-                      <h1 className="fw-bolder text-white mt-2 mb-3">
-                        Add Item
-                      </h1>
+                        <div className="d-flex justify-content-between">
+                        <Col>
+                            <h1 className="fw-bolder text-white mt-2 mb-3">
+                            Add Item
+                            </h1>
+                        </Col>
+                        <Col >
+                            <button className="btn btn-light">Add Category</button>&nbsp;&nbsp;&nbsp;
+                            <button className="btn btn-light">Add Tag</button>
+                        </Col>
+                        </div>
                     </Col>
                   </Row>
                   <Form noValidate validated={validated}>

@@ -41,6 +41,83 @@ const Invoice = () => {
         }
     }
 
+    
+    const handleClick_All = () => {
+        try {
+            dispatch(
+                retrieve_orders()
+            ).then((response) => {
+                setOrders(response.data)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+    const handleClick_Accepted = () => {
+        try {
+            dispatch(
+                retrieve_orders()
+            ).then((response) => {
+                const displayedOrders = response.data.filter(order => order.order_status === 'Accepted');
+                setOrders(displayedOrders)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+    
+    const handleClick_Packed = () => {
+        try {
+            dispatch(
+                retrieve_orders()
+            ).then((response) => {
+                const displayedOrders = response.data.filter(order => order.order_status === 'Packed');
+                setOrders(displayedOrders)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+    const handleClick_Delivery = () => {
+        try {
+            dispatch(
+                retrieve_orders()
+            ).then((response) => {
+                const displayedOrders = response.data.filter(order => order.order_status === 'Delivery');
+                setOrders(displayedOrders)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+    const handleClick_Delivered = () => {
+        try {
+            dispatch(
+                retrieve_orders()
+            ).then((response) => {
+                const displayedOrders = response.data.filter(order => order.order_status === 'Delivered');
+                setOrders(displayedOrders)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+
     const __renderOrderSection = (order, key) => {
         let id = key + 1
         return (
@@ -230,6 +307,15 @@ const Invoice = () => {
                                             </h1>
                                         </Col>
                                     </Row>
+                                    
+                                    <div class="d-flex justify-content-around border-primary">
+                                    <button type="button" class="btn btn-light" onClick={handleClick_All}>All Orders</button>
+                                    <button type="button" class="btn btn-light" onClick={handleClick_Accepted}>Accepted</button>                                                                        
+                                    <button type="button" class="btn btn-light" onClick={handleClick_Packed}>Packed</button>
+                                    <button type="button" class="btn btn-light" onClick={handleClick_Delivery}>Delivery</button>
+                                    <button type="button" class="btn btn-light" onClick={handleClick_Delivered}>Delivered</button>
+                                    </div>
+                                    <br/>
                                     {
                                         orders.length > 0 ? (
                                             <Row>

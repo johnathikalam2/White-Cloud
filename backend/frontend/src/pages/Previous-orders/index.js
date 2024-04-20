@@ -166,11 +166,11 @@ const PreviousOrders = () => {
                                         </Col>
                                     </Row>
                                     <div class="d-flex justify-content-around border-primary">
-                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_All}>All Orders</button>
-                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_Accepted}>Accepted</button>
-                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_Packed}>Packed</button>
-                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_Delivery}>Delivery</button>
-                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_Delivered}>Delivered</button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_All}>All Orders</button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Accepted}>Accepted</button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Packed}>Packed</button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivery}>Delivery</button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivered}>Delivered</button>
                                     </div>
                                     <br />
 

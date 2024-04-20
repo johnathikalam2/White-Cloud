@@ -9,6 +9,8 @@ import { faPrint } from '@fortawesome/fontawesome-free-solid';
 import moment from 'moment';
 import { change_status, retrieve_orders } from '../../redux/actions/orders.action';
 import { useNavigate } from 'react-router-dom';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import axios from 'axios';
 
 const Invoice = () => {
 
@@ -197,6 +199,22 @@ const Invoice = () => {
 
     console.log(selectOrder.order_status);
 
+
+    const __clickSendToWhatsapp = async (e) => {
+        // Code to send the PDF to the user's WhatsApp number using the Mtalkz service
+        const pdfUrl = "https://example.com/path/to/your/pdf"; 
+        const whatsappNumber = selectOrder?.cx_phone_number; // Replace with the user's WhatsApp number
+    
+        const response = await axios.get(`https://api.mtalkz.com/v2/sms/send?username=YOUR_USERNAME&password=YOUR_PASSWORD&caller=YOUR_CALLER_ID&mobile=${whatsappNumber}&type=1&content=${pdfUrl}&templateid=YOUR_TEMPLATE_ID`);
+    
+        if (response.data.status === "success") {
+            console.log("PDF sent to WhatsApp successfully");
+        } else {
+            console.log("Failed to send PDF to WhatsApp");
+        }
+    };
+
+
     return (
         <React.Fragment>
             <div className='d-flex align-items-center p-5'>
@@ -311,7 +329,7 @@ const Invoice = () => {
                                                                              }
                                                                             </div>
                                                                             <div className='text-start'>
-                                                                             <div className='form-group'>
+                                                                             <div className='d-flex justify-content-end'>
                                                                                 <Row className='text-end'>
                                                                                      <Col>
                                                                                      <OverlayTrigger placement="bottom" overlay={<Tooltip id="Print">Banner</Tooltip>}>
@@ -322,6 +340,16 @@ const Invoice = () => {
                                                                                              onClick={__clickStockReportPDF}
                                                                                              />
                                                                                      </OverlayTrigger>
+                                                                                     </Col>
+                                                                                     <Col>
+                                                                                     <OverlayTrigger placement="bottom" overlay={<Tooltip id="Whatsapp">Send to Whatsapp</Tooltip>}>
+                                                                                        <RenderButton
+                                                                                            variant={"primary"}
+                                                                                            type={"button"}
+                                                                                            title={<FontAwesomeIcon icon={faWhatsapp}/>}
+                                                                                            onClick={__clickSendToWhatsapp}
+                                                                                        />
+                                                                                      </OverlayTrigger>
                                                                                      </Col>
                                                                                  </Row>
                                                                                </div>

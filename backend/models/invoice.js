@@ -10,7 +10,7 @@ const ItemSchema = new mongoose.Schema({
   offer_price: Number,
   discount: Number,
   item_catogory: [{ type: String }],
-  item_tags: String,
+  item_tags: [{ type: String }],
   instock_outstock_indication: String,
   stock_quantity: Number,
   item_discription: String,

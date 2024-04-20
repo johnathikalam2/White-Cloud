@@ -29,6 +29,84 @@ const PreviousOrders = () => {
         }
     };
 
+
+    const handleClick_All = () => {
+        try {
+            dispatch(
+                retrieve_orders()//{ order_status: 'Accepted' }
+            ).then((response) => {
+                setOrders(response.data)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+    const handleClick_Accepted = () => {
+        try {
+            dispatch(
+                retrieve_orders()
+            ).then((response) => {
+                const displayedOrders = response.data.filter(order => order.order_status === 'Accepted');
+                setOrders(displayedOrders)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+    
+    const handleClick_Packed = () => {
+        try {
+            dispatch(
+                retrieve_orders()
+            ).then((response) => {
+                const displayedOrders = response.data.filter(order => order.order_status === 'Packed');
+                setOrders(displayedOrders)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+    const handleClick_Delivery = () => {
+        try {
+            dispatch(
+                retrieve_orders()
+            ).then((response) => {
+                const displayedOrders = response.data.filter(order => order.order_status === 'Delivery');
+                setOrders(displayedOrders)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+    const handleClick_Delivered = () => {
+        try {
+            dispatch(
+                retrieve_orders()
+            ).then((response) => {
+                const displayedOrders = response.data.filter(order => order.order_status === 'Delivered');
+                setOrders(displayedOrders)
+            }).catch((error) => {
+                console.log('error : ', error);
+            })
+        } catch (error) {
+            console.log('error : ', error)
+        }
+    };
+
+
+
     orders.map((item, index) => {
         item.index = index + 1;
         return item;
@@ -77,6 +155,9 @@ const PreviousOrders = () => {
                         <Col md={12} className='d-flex align-items-center justify-content-center'>
                             <div className='card w-100 dashboard-card' ref={ref}>
                                 <div className='card-body'>
+                                
+                                
+
                                     <Row>
                                         <Col md={12}>
                                             <h1 className='fw-bolder text-white mt-2 mb-3'>
@@ -84,6 +165,15 @@ const PreviousOrders = () => {
                                             </h1>
                                         </Col>
                                     </Row>
+                                    <div class="d-flex justify-content-around border-primary">
+                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_All}>All Orders</button>
+                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_Accepted}>Accepted</button>
+                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_Packed}>Packed</button>
+                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_Delivery}>Delivery</button>
+                                        <button type="button" class="btn btn-outline-light fw-bolder" onClick={handleClick_Delivered}>Delivered</button>
+                                    </div>
+                                    <br />
+
                                     <Table
                                         rowKey={(row) => row._id}
                                         dataSource={orders}

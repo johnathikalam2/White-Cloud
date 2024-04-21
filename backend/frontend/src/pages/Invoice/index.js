@@ -107,7 +107,12 @@ const Invoice = () => {
             dispatch(
                 retrieve_orders()
             ).then((response) => {
-                const displayedOrders = response.data.filter(order => order.order_status === 'Delivered');
+                const now = new Date();
+                const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+                const displayedOrders = response.data.filter(order => {
+                    const orderDate = new Date(order.order_date);
+                    return order.order_status === 'Delivered' && orderDate >= oneDayAgo;
+                  });
                 setOrders(displayedOrders)
             }).catch((error) => {
                 console.log('error : ', error);

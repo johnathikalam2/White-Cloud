@@ -4,6 +4,7 @@ import { RenderButton } from '../../component/Button'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { get_item, update_item } from '../../redux/actions/items.action'
+import { retrieve_tag } from '../../redux/actions/items.action';
 import noIMg from '../../assets/images/No_Image_Available.jpeg'
 import swal from 'sweetalert'
 import Select from 'react-select';
@@ -13,6 +14,7 @@ export const Item = () => {
     // const [category,setCategory]=useState('')
     
 
+    const [tagsData, setTagsData] = useState([]);
     const [file,setFile] = useState('')
     const [preview,setPreview] = useState('')
     const [hsbFile,sethsbFile] = useState('')
@@ -49,33 +51,7 @@ export const Item = () => {
         {label:'Prayer Corner',value:'Prayer Corner'},
         {label:'Miscellaneous',value:'Miscellaneous'},
     ]
-    const tagsData = [
-        {label:'Soaps & Shampoo',value:'Soaps & Shampoo'},
-        {label:'Biscuits & Rusk',value:'Biscuits & Rusk'},
-        {label:'Rice flour & Semolina',value:'Rice flour & Semolina'},
-        {label:'Papadam',value:'Papadam'},
-        {label:'Powder',value:'Powder'},
-        {label:'Soap powder',value:'Soap powder'},
-        {label:'Tea & Coffee Powder',value:'Tea & Coffee Powder'},
-        {label:'Oil',value:'Oil'},
-        {label:'Tamarind',value:'Tamarind'},
-        {label:'Toothpaste',value:'Toothpaste'},
-        {label:'Hair Die',value:'Hair Die'},
-        {label:'Battery',value:'Battery'},
-        {label:'Spice Powders',value:'Spice Powders'},
-        {label:'Pampers',value:'Pampers'},
-        {label:'Sanitary Napkin',value:'Sanitary Napkin'},
-        {label:'Dish wash',value:'Dish wash'},
-        {label:'Vinegar',value:'Vinegar'},
-        {label:'Dal',value:'Dal'},
-        {label:'Soybean',value:'Soybean'},
-        {label:'Beans',value:'Beans'},
-        {label:'Harpic',value:'Harpic'},
-        {label:'Vermicelli',value:'Vermicelli'},
-        {label:'Egg',value:'Egg'},
-        {label:'Yeast',value:'Yeast'},
-    ]
-
+    
     const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -85,6 +61,23 @@ export const Item = () => {
             get_stock_detail()
         }
     }, [])
+    useEffect(()=>{
+        __fetchTags()
+    },[])
+
+    const __fetchTags = () => {
+        try {
+          dispatch(retrieve_tag())
+              .then((response) => {
+                  setTagsData(response.data.map(tag => ({ label: tag.tags, value: tag.tags })));
+              })
+              .catch((error) => {
+                  console.log("error : ", error);
+              });
+      } catch (error) {
+          console.log("__fetchItems Catch block error : ", error);
+      }
+    };
 
     const get_stock_detail = () => {
         dispatch(get_item(id)).then(res =>{

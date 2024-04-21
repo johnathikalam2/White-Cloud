@@ -4,8 +4,8 @@ import axios from 'axios'
 //const API_URL = `${process.env.REACT_APP_API_URL}`;
 const API_URL = `${window.location.origin}`;
 export default function call({ path, method, data }) {
-  console.log("API_URL: ", API_URL);
-  console.log("path: ", path);
+  //console.log("API_URL: ", API_URL);
+  //console.log("path: ", path);
   return new Promise((resolve, reject) => {
     axios({
       url: `${API_URL}${path}`,

@@ -6,11 +6,13 @@ import swal from "sweetalert";
 import { RenderButton } from "../../component/Button";
 import { create_item } from "../../redux/actions/items.action";
 import { retrieve_item } from '../../redux/actions/items.action';
+import { retrieve_tag } from '../../redux/actions/items.action';
 import Select from 'react-select';
+import axios from 'axios'
 
 const ItemAdd = () => {
-    
     const [items, setItems] = useState([]);
+    const [tagsData, setTagsData] = useState([]);
     const existingItemCodes = items.map(item => item.item_code);
     const [stockIndicater,setStockIndicater]=useState('')
     //const [mesuring_Qntty,setMesuring_Qntty]=useState('')
@@ -32,7 +34,6 @@ const ItemAdd = () => {
         "discount": '',
         "item_catogory": '',
         "item_tags": '',
-        //"item_type": '',
         "item_hsb": '',
         "instock_outstock_indication": '',
         "stock_quantity": '',
@@ -54,32 +55,7 @@ const ItemAdd = () => {
         {label:'Prayer Corner',value:'Prayer Corner'},
         {label:'Miscellaneous',value:'Miscellaneous'},
     ]
-    const tagsData = [
-        {label:'Soaps & Shampoo',value:'Soaps & Shampoo'},
-        {label:'Biscuits & Rusk',value:'Biscuits & Rusk'},
-        {label:'Rice flour & Semolina',value:'Rice flour & Semolina'},
-        {label:'Papadam',value:'Papadam'},
-        {label:'Powder',value:'Powder'},
-        {label:'Soap powder',value:'Soap powder'},
-        {label:'Tea & Coffee Powder',value:'Tea & Coffee Powder'},
-        {label:'Oil',value:'Oil'},
-        {label:'Tamarind',value:'Tamarind'},
-        {label:'Toothpaste',value:'Toothpaste'},
-        {label:'Hair Die',value:'Hair Die'},
-        {label:'Battery',value:'Battery'},
-        {label:'Spice Powders',value:'Spice Powders'},
-        {label:'Pampers',value:'Pampers'},
-        {label:'Sanitary Napkin',value:'Sanitary Napkin'},
-        {label:'Dish wash',value:'Dish wash'},
-        {label:'Vinegar',value:'Vinegar'},
-        {label:'Dal',value:'Dal'},
-        {label:'Soybean',value:'Soybean'},
-        {label:'Beans',value:'Beans'},
-        {label:'Harpic',value:'Harpic'},
-        {label:'Vermicelli',value:'Vermicelli'},
-        {label:'Egg',value:'Egg'},
-        {label:'Yeast',value:'Yeast'},
-    ]
+    
 
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -100,6 +76,18 @@ const ItemAdd = () => {
       } catch (error) {
           console.log("__fetchItems Catch block error : ", error);
       }
+
+      try {
+        dispatch(retrieve_tag())
+            .then((response) => {
+                setTagsData(response.data.map(tag => ({ label: tag.tags, value: tag.tags })));
+            })
+            .catch((error) => {
+                console.log("error : ", error);
+            });
+    } catch (error) {
+        console.log("__fetchItems Catch block error : ", error);
+    }
   };
 
 const allCodes = Array.from({ length: 10000 }, (v, i) => String(i).padStart(4, '0'));
@@ -190,6 +178,30 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
         })
     }
 
+    const [tags, setTags] = useState('');
+    const handleAddTag = async () => {
+        try {
+          await axios.post('/addTag', { tags }).then((res) => {
+                swal({
+                    title: "Tag added sucessfully...",
+                    text: res.message,
+                    icon: "success",
+                    showConfirmButton: false,
+                    button: true,
+                  }).then((willRefresh) => {
+                    if (willRefresh) {
+                      window.location.reload();
+                    }
+                  });
+            setTags('');
+          }).catch(err =>{
+            console.log(err);
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
   return (
     <React.Fragment>
       <div className="d-flex align-items-center p-5">
@@ -200,15 +212,17 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                 <div className="card-body">
                   <Row>
                     <Col md={12}>
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between ">
                         <Col>
                             <h1 className="fw-bolder text-white mt-2 mb-3">
                             Add Item
                             </h1>
+                            
                         </Col>
-                        <Col >
-                            <button className="btn btn-light">Add Category</button>&nbsp;&nbsp;&nbsp;
-                            <button className="btn btn-light">Add Tag</button>
+                        <Col className='col-md-4 d-flex align-items-center'>
+                        <input value={tags} className="form-control" onChange={e => setTags(e.target.value)}/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button className="btn btn-light form-control" onClick={handleAddTag}>Add Tag</button>
                         </Col>
                         </div>
                     </Col>

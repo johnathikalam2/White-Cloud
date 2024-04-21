@@ -12,6 +12,16 @@ class ItemService {
         };
     }
 
+    getTag() {
+        const stockList = Call({
+            path:"/tags",
+            method:"GET"
+        })
+        return {
+            data: stockList
+        };
+    }
+
     getItem(id) {
         const stockDetail = call({
             path: `/itemEdit/${id}`,

@@ -1,5 +1,5 @@
 import ItemService from '../../services/items.service';
-import { BANNER_ADD, BANNER_DELETE, BANNER_LIST, CREATE_ITEM, DELETE_ITEM, GET_ITEM, RETRIEVE_ITEM, UPDATE_ITEM } from './types';
+import { BANNER_ADD, BANNER_DELETE, BANNER_LIST, CREATE_ITEM, DELETE_ITEM, GET_ITEM, RETRIEVE_TAG, RETRIEVE_ITEM, UPDATE_ITEM } from './types';
 
 export const retrieve_item = () => async (dispatch) => {
     try {
@@ -16,6 +16,18 @@ export const retrieve_item = () => async (dispatch) => {
     }
 }
 
+export const retrieve_tag = () => async (dispatch) => {
+    try {
+        const response = await ItemService.getTag();
+        dispatch({
+            type: RETRIEVE_TAG,
+            payload: response
+        });
+        return Promise.resolve(response.data);
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}
 export const get_item = (id) => {
     try {
         return function (dispatch) {

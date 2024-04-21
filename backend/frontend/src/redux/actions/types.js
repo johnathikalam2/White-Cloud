@@ -22,3 +22,5 @@ export const BANNER_ADD = 'BANNER_ADD';
 export const BANNER_DELETE  = 'BANNER_DELETE';
 export const BANNER_LIST  = 'BANNER_LIST';
 
+export const RETRIEVE_TAG = 'RETRIEVE_TAG';
+

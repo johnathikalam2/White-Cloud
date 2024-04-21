@@ -9,6 +9,8 @@ const Invoice = require('./models/invoice');
 const Banner = require('./models/banner');  
 const Admin = require('./models/admin');
 const User = require('./models/user');
+const Tag = require('./models/tag');
+
 
 const app = express();
 
@@ -301,6 +303,49 @@ app.post('/add_banner', upload.fields([ { name: 'banner_img', maxCount: 1 }]), a
   }
 });
 
+app.get('/tags', async (req, res) => {
+  try {
+    const tags = await Tag.find({});
+
+    res.json({
+      success: true,
+      data: tags
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: 'An error occurred while retrieving the tags'
+    });
+  }
+});
+
+
+app.post('/addTag', async (req, res) => {
+  try {
+    const tags = req.body.tags;
+
+    if (!tags) {
+      return res.status(400).json({
+        success: false,
+        message: 'Tag is required'
+      });
+    }
+    const newTag = new Tag({ tags: tags });
+    await newTag.save();
+    res.json({
+      success: true,
+      message: 'Tag created successfully',
+      tag: newTag
+    });
+  }  catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: 'An error occurred while creating the tag'
+    });
+  }
+});
 
 app.post('/orderStore', upload.none(), async (req, res) => {
   try {

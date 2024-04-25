@@ -179,28 +179,44 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
     }
 
     const [tags, setTags] = useState('');
+
     const handleAddTag = async () => {
         try {
-          await axios.post('/addTag', { tags }).then((res) => {
-                swal({
-                    title: "Tag added sucessfully...",
-                    text: res.message,
-                    icon: "success",
-                    showConfirmButton: false,
-                    button: true,
-                  }).then((willRefresh) => {
-                    if (willRefresh) {
-                      window.location.reload();
-                    }
-                  });
-            setTags('');
-          }).catch(err =>{
-            console.log(err);
-          });
+            dispatch(retrieve_tag())
+            .then(async (response) => {
+                const existingTags = response.data.map(item => item.tags);
+                if (!existingTags.includes(tags)) {
+                    await axios.post('/addTag', { tags }).then((res) => {
+                        swal({
+                            title: "Tag added successfully...",
+                            text: res.message,
+                            icon: "success",
+                            showConfirmButton: false,
+                            button: true,
+                        }).then((willRefresh) => {
+                            if (willRefresh) {
+                                window.location.reload();
+                            }
+                        });
+                        setTags('');
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                } else {
+                    swal({
+                        title: "Error",
+                        text: "This tag already exists",
+                        icon: "error",
+                        button: true,
+                    });
+                }
+            }).catch(err => {
+                console.log(err);
+            });
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
-      };
+    };
 
   return (
     <React.Fragment>

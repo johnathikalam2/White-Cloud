@@ -7,6 +7,10 @@ import { Table } from 'antd';
 const PreviousOrders = () => {
 
     const [orders, setOrders] = useState([]);
+    const [acceptedOrdersCount, setAcceptedOrders] = useState('');
+    const [packedOrdersCount, setPackedOrders] = useState('');
+    const [deliveryOrdersCount, setDeliveryOrders] = useState('');
+    const [deliveredOrdersCount, setDeliveredOrders] = useState('');
 
     const dispatch = useDispatch();
     const ref = useRef();
@@ -21,6 +25,20 @@ const PreviousOrders = () => {
                 retrieve_orders()
             ).then((response) => {
                 setOrders(response.data)
+                const acceptedOrders = response.data.filter(order => order.order_status === 'Accepted').length;
+                setAcceptedOrders(acceptedOrders);
+                const packedOrders = response.data.filter(order => order.order_status === 'Packed').length;
+                setPackedOrders(packedOrders);
+                const deliveryOrders = response.data.filter(order => order.order_status === 'Delivery').length;
+                setDeliveryOrders(deliveryOrders);
+                const now = new Date();
+                const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+                const displayedOrders = response.data.filter(order => {
+                    const orderDate = new Date(order.order_date);
+                    return order.order_status === 'Delivered' && orderDate >= oneDayAgo;
+                  });
+                const deliveredOrders = displayedOrders.length;
+                setDeliveredOrders(deliveredOrders);
             }).catch((error) => {
                 console.log('error : ', error);
             })
@@ -172,10 +190,10 @@ const PreviousOrders = () => {
                                     </Row>
                                     <div class="d-flex justify-content-around border-primary">
                                         <button type="button" class="btn btn-light" onClick={handleClick_All}>All Orders</button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Accepted}>Accepted</button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Packed}>Packed</button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivery}>Delivery</button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivered}>Delivered</button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Accepted}>Accepted<span class="badge badge-light text-primary">{acceptedOrdersCount}</span></button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Packed}>Packed<span class="badge badge-light text-primary">{packedOrdersCount}</span></button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivery}>Delivery<span class="badge badge-light text-primary">{deliveryOrdersCount}</span></button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivered}>Delivered<span class="badge badge-light text-primary">{deliveredOrdersCount}</span></button>
                                     </div>
                                     <br />
 

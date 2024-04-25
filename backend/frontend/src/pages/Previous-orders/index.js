@@ -190,10 +190,10 @@ const PreviousOrders = () => {
                                     </Row>
                                     <div class="d-flex justify-content-around border-primary">
                                         <button type="button" class="btn btn-light" onClick={handleClick_All}>All Orders</button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Accepted}>Accepted<span class="badge badge-light text-primary">{acceptedOrdersCount}</span></button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Packed}>Packed<span class="badge badge-light text-primary">{packedOrdersCount}</span></button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivery}>Delivery<span class="badge badge-light text-primary">{deliveryOrdersCount}</span></button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivered}>Delivered<span class="badge badge-light text-primary">{deliveredOrdersCount}</span></button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Accepted}>Accepted<span class="badge badge-light text-danger"><p class="h4">{acceptedOrdersCount}</p></span></button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Packed}>Packed<span class="badge badge-light text-danger"><p class="h4">{packedOrdersCount}</p></span></button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivery}>Out for Delivery<span class="badge badge-light text-danger"><p class="h4">{deliveryOrdersCount}</p></span></button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivered}>Delivered Today<span class="badge badge-light text-success"><p class="h4">{deliveredOrdersCount}</p></span></button>
                                     </div>
                                     <br />
 

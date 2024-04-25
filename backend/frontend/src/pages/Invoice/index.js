@@ -282,19 +282,14 @@ const Invoice = () => {
     console.log(selectOrder.order_status);
 
 
-    const __clickSendToWhatsapp = async (e) => {
-        // Code to send the PDF to the user's WhatsApp number using the Mtalkz service
-        const pdfUrl = "https://example.com/path/to/your/pdf"; 
-        const whatsappNumber = selectOrder?.cx_phone_number; // Replace with the user's WhatsApp number
-    
-        const response = await axios.get(`https://api.mtalkz.com/v2/sms/send?username=YOUR_USERNAME&password=YOUR_PASSWORD&caller=YOUR_CALLER_ID&mobile=${whatsappNumber}&type=1&content=${pdfUrl}&templateid=YOUR_TEMPLATE_ID`);
-    
-        if (response.data.status === "success") {
-            console.log("PDF sent to WhatsApp successfully");
-        } else {
-            console.log("Failed to send PDF to WhatsApp");
+    const __clickSendToWhatsapp = async () => {
+        try {
+            window.open(`https://wa.me/+91${selectOrder.cx_phone_number}?text=${encodeURIComponent("document")}`);
+        } catch (err) {
+          console.error(err);
         }
-    };
+      };
+
 
 
     return (
@@ -428,18 +423,21 @@ const Invoice = () => {
                                                                                              variant={"primary"}
                                                                                              type={"button"}
                                                                                              title={<FontAwesomeIcon icon={faPrint}/>}
-                                                                                             onClick={__clickStockReportPDF}
+                                                                                             onClick={__clickStockReportPDF}   
                                                                                              />
                                                                                      </OverlayTrigger>
                                                                                      </Col>
                                                                                      <Col>
                                                                                      <OverlayTrigger placement="bottom" overlay={<Tooltip id="Whatsapp">Send to Whatsapp</Tooltip>}>
+                                                                                     
                                                                                         <RenderButton
                                                                                             variant={"primary"}
                                                                                             type={"button"}
                                                                                             title={<FontAwesomeIcon icon={faWhatsapp}/>}
                                                                                             onClick={__clickSendToWhatsapp}
+                                                                                            //onClick={window.open(`https://wa.me/+91${selectOrder.cx_phone_number}`)}
                                                                                         />
+                                                                                    
                                                                                       </OverlayTrigger>
                                                                                      </Col>
                                                                                  </Row>

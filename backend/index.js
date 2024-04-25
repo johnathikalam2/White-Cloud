@@ -10,6 +10,8 @@ const Banner = require('./models/banner');
 const Admin = require('./models/admin');
 const User = require('./models/user');
 const Tag = require('./models/tag');
+const PDF = require('./models/invoicePDF');
+const fs = require('fs');
 
 
 const app = express();
@@ -344,6 +346,21 @@ app.post('/addTag', async (req, res) => {
       success: false,
       message: 'An error occurred while creating the tag'
     });
+  }
+});
+
+app.post('/uploadInvoice', upload.single('file'), async (req, res) => {
+  console.log(req.file); // Add this line
+  try {
+    const newInvoice = new PDF();
+    newInvoice.data = fs.readFileSync(req.file.path);
+    newInvoice.contentType = req.file.mimetype;
+
+    await newInvoice.save();
+
+    res.status(200).send({ message: 'File uploaded and saved to database.' });
+  } catch (err) {
+    res.status(500).send({ error: err.message });
   }
 });
 

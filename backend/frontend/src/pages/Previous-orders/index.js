@@ -189,11 +189,11 @@ const PreviousOrders = () => {
                                         </Col>
                                     </Row>
                                     <div class="d-flex justify-content-around border-primary">
-                                        <button type="button" class="btn btn-light" onClick={handleClick_All}>All Orders</button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Accepted}>Accepted<span class="badge badge-light text-danger"><p class="h4">{acceptedOrdersCount}</p></span></button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Packed}>Packed<span class="badge badge-light text-danger"><p class="h4">{packedOrdersCount}</p></span></button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivery}>Out for Delivery<span class="badge badge-light text-danger"><p class="h4">{deliveryOrdersCount}</p></span></button>
-                                        <button type="button" class="btn btn-light" onClick={handleClick_Delivered}>Delivered Today<span class="badge badge-light text-success"><p class="h4">{deliveredOrdersCount}</p></span></button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_All}>&nbsp;&nbsp;All Orders &nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Accepted}>Accepted<span class="badge badge-light align-middle"><p class="display-6 text-danger" style={{fontWeight: 'bold'}}><strong>&nbsp;&nbsp;{acceptedOrdersCount}</strong></p></span></button>                                                                        
+                                        <button type="button" class="btn btn-light" onClick={handleClick_Packed}>Packed<span class="badge badge-light align-middle"><p class="display-6 text-danger"  style={{fontWeight: 'bold'}}><strong>&nbsp;{packedOrdersCount}</strong></p></span></button>
+                                    <button type="button" class="btn btn-light" onClick={handleClick_Delivery}>Out for Delivery<span class="badge badge-light align-middle"><p class="display-6 text-danger"  style={{fontWeight: 'bold'}}><strong>&nbsp;{deliveryOrdersCount}</strong></p></span></button>
+                                    <button type="button" class="btn btn-light" onClick={handleClick_Delivered}>Delivered Today<span class="badge badge-light align-middle"><p class="display-6 text-success"  style={{fontWeight: 'bold'}}><strong>&nbsp;{deliveredOrdersCount}</strong></p></span></button>
                                     </div>
                                     <br />
 

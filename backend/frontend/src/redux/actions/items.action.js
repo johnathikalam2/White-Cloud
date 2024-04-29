@@ -1,11 +1,26 @@
 import ItemService from '../../services/items.service';
-import { BANNER_ADD, BANNER_DELETE, BANNER_LIST, CREATE_ITEM, DELETE_ITEM, GET_ITEM, RETRIEVE_TAG, RETRIEVE_ITEM, UPDATE_ITEM } from './types';
+import { BANNER_ADD, BANNER_DELETE, BANNER_LIST, CREATE_ITEM, DELETE_ITEM, GET_ITEM, RETRIEVE_ALL_ITEM, RETRIEVE_TAG, RETRIEVE_ITEM, UPDATE_ITEM } from './types';
 
 export const retrieve_item = () => async (dispatch) => {
     try {
         const response = await ItemService.getList();
         dispatch({
             type: RETRIEVE_ITEM,
+            payload: response
+        });
+        //console.log('RETRIEVE ITEM RESPONSE : ', response);
+        return Promise.resolve(response.data);
+    } catch (error) {
+        //console.log('RETRIEVE ITEM CATCH BLOCK ERROR : ', error);
+        return Promise.reject(error);
+    }
+}
+
+export const retrieve_all_items = () => async (dispatch) => {
+    try {
+        const response = await ItemService.getListItems();
+        dispatch({
+            type: RETRIEVE_ALL_ITEM,
             payload: response
         });
         //console.log('RETRIEVE ITEM RESPONSE : ', response);

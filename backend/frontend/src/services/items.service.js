@@ -5,6 +5,16 @@ class ItemService {
     getList() {
         const stockList = Call({
             path:"/items",
+            method:"GET",
+        })
+        return {
+            data: stockList
+        };
+    }
+
+    getListItems() {
+        const stockList = Call({
+            path:"/allItems",
             method:"GET"
         })
         return {

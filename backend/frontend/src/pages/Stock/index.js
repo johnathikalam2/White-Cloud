@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import VegitablesThree from "../../assets/images/vegetables-three.jpg";
 import { useDispatch } from "react-redux";
-import { Delete_item, retrieve_item } from "../../redux/actions/items.action";
+import { Delete_item, retrieve_item, retrieve_all_items } from "../../redux/actions/items.action";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { RenderButton } from "../../component/Button";
@@ -16,6 +16,7 @@ import swal from "sweetalert";
 
 export const Stock = () => {
     const [items, setItems] = useState([]);
+    const [allitems, setAllItems] = useState([]);
     const [selectValue,setSelectValue] = useState([])
     const [selectDropDown, setSelectDropDown] = useState([]);
     const [loading,setLoading] = useState(true)
@@ -27,25 +28,69 @@ export const Stock = () => {
         __fetchItems();
     }, []);
 
-    const __fetchItems = () => {
-        try {
-            dispatch(retrieve_item())
-                .then((response) => {
-                    setItems(response.data);
-                    setSelectValue(response.data);
-                    __searchingBar(response.data);
-                    setTimeout(() => {
-                        setLoading(false)
-                    }, 500);
-                })
-                .catch((error) => {
-                    console.log("error : ", error);
-                });
-        } catch (error) {
-            console.log("__fetchItems Catch block error : ", error);
-        }
-    };
+    const [page, setPage] = useState(1); // Add a new state variable for the current page
 
+const __fetchItems = () => {
+    try {
+        dispatch(retrieve_item()) // Pass the current page and items per page to the API
+            .then((response) => {
+                //console.log("response.data", response.data);
+                setItems(prevItems => [...prevItems, ...response.data]); // Append the new items to the existing items
+                //setPage(prevPage => prevPage + 1); // Increment the page number for the next request
+                __searchingBar(response.data);
+                setTimeout(() => {
+                    setLoading(false)
+                }, 500);
+                __fetchItemStock();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+};
+    
+const __fetchItemStock = () => {
+    try {
+        dispatch(retrieve_all_items())
+            .then((response) => {
+                setAllItems(response.data);
+                setItems(response.data.reverse());
+                setSelectValue(response.data);
+                __searchingBar(response.data);
+                setTimeout(() => {
+                    setLoading(false)
+                }, 500);
+            })
+            .catch((error) => {
+                console.log("error : ", error);
+            });
+    } catch (error) {
+        console.log("__fetchItems Catch block error : ", error);
+    }
+};
+
+const __clickStockReportPDF = async (e) => {
+    //await __fetchItemStock();
+    if (allitems.length > 0) {
+        let body = [];
+        allitems.forEach((item) => {
+            body.push([
+                item.item_code,
+                item.item_name,
+                item.stock_quantity
+            ]);
+        });
+
+        const doc = new jsPDF();
+        autoTable(doc, {
+            head: [['Item Code', 'Item Name', 'Stock Quantity']],
+            body: body,
+        });
+        doc.save('table.pdf');
+    }
+};
 
     const __searchingBar = (data) => {
         //console.log("data __searchingBar : ", data);
@@ -109,24 +154,7 @@ export const Stock = () => {
                     }
                 })
     }
-    const __clickStockReportPDF = (e) => {
-
-        let body = [];
-        items.forEach((item) => {
-            body.push([
-                item.item_code,
-                item.item_name,
-                item.stock_quantity
-            ]);
-        })
-
-        const doc = new jsPDF();
-        autoTable(doc, {
-            head: [['Item Code', 'Item Name', 'Stock Quantity']],
-            body: body,
-        })
-        doc.save('table.pdf')
-    };
+    
 
     return (
         <React.Fragment>
@@ -188,6 +216,7 @@ export const Stock = () => {
                                                   }  
                                                 
                                                 </Row>
+                                                {/*<button onClick={__fetchItems}>Load more items</button>*/}
                                                 <Row>
                                                     <Col
                                                         md={12}

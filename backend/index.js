@@ -80,10 +80,45 @@ app.get("/add-item/:id",(req,res)=>{
     //res.send("Express app is running")
 })
 
-
 app.get('/items', async (req, res) => {
   try {
-    const items = await Item.find({});
+    console.log(req.query);
+    //const page = parseInt(req.query.page) || 9; // Get the current page from the query parameters (default to 1 if not provided)
+    //const itemsPerPage = parseInt(req.query.itemsPerPage) || 24; // Get the number of items per page from the query parameters (default to 20 if not provided)
+
+    const totalItems = await Item.countDocuments({}); // Get the total number of items
+    //console.log(`Total Items : ${totalItems}`);
+    //const skipItems = Math.max(0, totalItems - page * itemsPerPage); // Calculate the number of items to skip
+
+    //if (skipItems >= totalItems) {
+      // If the number of items to skip is equal to or greater than the total number of items, return an empty array
+      //return res.json({
+      //  success: true,
+      //  data: []
+      //});
+    //}
+
+    const items = await Item.find({})
+      .sort({_id: -1}) // Sort items in descending order by ID
+      //.skip(skipItems) // Skip the items that come before the current page
+      .limit(42); // Only fetch the items for the current page
+
+    res.json({
+      success: true,
+      data: items
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: 'An error occurred while retrieving the items'
+    });
+  }
+});
+
+app.get('/allItems', async (req, res) => {
+  try {
+    const items = await Item.find({}).sort({_id: 1});
 
     res.json({
       success: true,

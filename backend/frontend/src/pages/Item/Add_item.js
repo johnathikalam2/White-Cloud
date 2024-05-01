@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { RenderButton } from "../../component/Button";
 import { create_item } from "../../redux/actions/items.action";
-import { retrieve_item } from '../../redux/actions/items.action';
+import { retrieve_all_items } from '../../redux/actions/items.action';
 import { retrieve_tag } from '../../redux/actions/items.action';
 import Select from 'react-select';
 import axios from 'axios'
@@ -66,7 +66,7 @@ const ItemAdd = () => {
   
     const __fetchItems = () => {
       try {
-          dispatch(retrieve_item())
+          dispatch(retrieve_all_items())
               .then((response) => {
                   setItems(response.data);
               })

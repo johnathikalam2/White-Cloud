@@ -87,7 +87,7 @@ app.get('/items', async (req, res) => {
     //const itemsPerPage = parseInt(req.query.itemsPerPage) || 24; // Get the number of items per page from the query parameters (default to 20 if not provided)
 
     const totalItems = await Item.countDocuments({}); // Get the total number of items
-    //console.log(`Total Items : ${totalItems}`);
+    console.log(`Total Items : ${totalItems}`);
     //const skipItems = Math.max(0, totalItems - page * itemsPerPage); // Calculate the number of items to skip
 
     //if (skipItems >= totalItems) {

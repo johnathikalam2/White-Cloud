@@ -237,14 +237,17 @@ app.post('/itemUpdate/:id', upload.fields([{ name: 'item_image', maxCount: 1 }, 
 
 app.post('/itemStore', upload.fields([{ name: 'item_image', maxCount: 1 }, { name: 'item_hsb', maxCount: 1 }]), async (req, res) => {
   const itemData = req.body;
-
+  const { item_name, mesuring_qntty, item_mrp, discount, item_catogory,item_tags,item_hsb,item_image,instock_outstock_indication,stock_quantity,item_discription} = itemData;
+  if (!item_name || !mesuring_qntty || !item_mrp || !discount || !item_catogory || !item_tags || !instock_outstock_indication || !stock_quantity|| !item_discription) {
+    return res.status(400).send({ success: false, error: "Please fill in all required fields." });
+  }
   const itemImage = req.files['item_image'] ? req.files['item_image'][0].buffer.toString('base64') : null;
   const itemHsb = req.files['item_hsb'] ? req.files['item_hsb'][0].buffer.toString('base64') : null;
 
   // Split the item_tags string into an array of tags
   const categoryArray = itemData.item_catogory.split('-').map(category => category.trim());
   const tagArray = itemData.item_tags.split('-').map(tag => tag.trim());
-
+  
   if (!itemImage || !itemHsb) {
     return res.status(400).send({ success: false, error: "Please fill in all required fields." });
 }

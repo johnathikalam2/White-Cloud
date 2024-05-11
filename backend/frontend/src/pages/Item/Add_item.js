@@ -299,7 +299,12 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                         <Col md={6}>
                             <Form.Group className="mb-3">
                                 <Form.Label className='text-white fw-semibold'>Offer price</Form.Label>
-                                <Form.Control type="number" placeholder="Enter offer price" name="offer_price" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' />
+                                <InputGroup hasValidation>
+                                    <Form.Control type="number" placeholder="Enter offer price" name="offer_price" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' required/>
+                                    <Form.Control.Feedback type="invalid" style={{fontSize:"20px"}}>
+                                            Offer price is required.
+                                    </Form.Control.Feedback>
+                                </InputGroup>
                             </Form.Group>
                         </Col>
                         {/* <Col md={6}>
@@ -317,6 +322,7 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                 options={CategoryData}
                                 value={category}
                                 onChange={(selected) => setCategory(selected)}
+                                required
                                 />
                             </Form.Group>
                         </Col>
@@ -328,7 +334,7 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                 isMulti
                                 options={tagsData}
                                 value={tag}
-                                onChange={(selected) => settag(selected)}
+                                onChange={(selected) => settag(selected)} 
                                 />
                             </Form.Group>
                         </Col>
@@ -388,7 +394,7 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                                     <Dropdown.Divider />
                                     <Dropdown.Item eventKey="1">No</Dropdown.Item>
                                 </DropdownButton> */}
-                                <select value={stockIndicater} className="form-select form-control" onChange={(e) => setStockIndicater(e.target.value)} >
+                                <select value={stockIndicater} className="form-select form-control" onChange={(e) => setStockIndicater(e.target.value)} required>
                                     <option value='' disabled="disabled">Instock/outstock indication</option>
                                     <option value="0" >Yes</option>
                                     <option value="1" >No</option>
@@ -424,7 +430,12 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                         <Col md={12}>
                             <Form.Group className="mb-3">
                                 <Form.Label className='text-white fw-semibold'>Item discription</Form.Label>
-                                <Form.Control as="textarea" rows={2} placeholder="Enter Item discription" name="item_discription" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' />
+                                <InputGroup hasValidation>
+                                    <Form.Control as="textarea" rows={2} placeholder="Enter Item discription" name="item_discription" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' required/>
+                                    <Form.Control.Feedback type="invalid" style={{fontSize:"20px"}}>
+                                        Item discription is required.
+                                    </Form.Control.Feedback>
+                                </InputGroup>
                             </Form.Group>
                         </Col>
                         

@@ -237,8 +237,8 @@ app.post('/itemUpdate/:id', upload.fields([{ name: 'item_image', maxCount: 1 }, 
 
 app.post('/itemStore', upload.fields([{ name: 'item_image', maxCount: 1 }, { name: 'item_hsb', maxCount: 1 }]), async (req, res) => {
   const itemData = req.body;
-  const { item_name, mesuring_qntty, item_mrp, discount, item_catogory,item_tags,item_hsb,item_image,instock_outstock_indication,stock_quantity,item_discription} = itemData;
-  if (!item_name || !mesuring_qntty || !item_mrp || !discount || !item_catogory || !item_tags || !instock_outstock_indication || !stock_quantity|| !item_discription) {
+  const { item_name, mesuring_qntty, item_mrp, discount, item_catogory,item_tags,item_hsb,item_image,instock_outstock_indication,stock_quantity} = itemData;
+  if (!item_name || !mesuring_qntty || !item_mrp || !discount || !item_catogory || !item_tags || !instock_outstock_indication || !stock_quantity) {
     return res.status(400).send({ success: false, error: "Please fill in all required fields." });
   }
   const itemImage = req.files['item_image'] ? req.files['item_image'][0].buffer.toString('base64') : null;

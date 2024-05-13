@@ -430,12 +430,8 @@ const itemCode = allCodes.find(code => !existingItemCodes.includes(code));
                         <Col md={12}>
                             <Form.Group className="mb-3">
                                 <Form.Label className='text-white fw-semibold'>Item discription</Form.Label>
-                                <InputGroup hasValidation>
-                                    <Form.Control as="textarea" rows={2} placeholder="Enter Item discription" name="item_discription" onChange={(e) => __changeInputFields(e)}  className='fw-semibold' required/>
-                                    <Form.Control.Feedback type="invalid" style={{fontSize:"20px"}}>
-                                        Item discription is required.
-                                    </Form.Control.Feedback>
-                                </InputGroup>
+                                    <Form.Control as="textarea" rows={2} placeholder="Enter Item discription" name="item_discription" onChange={(e) => __changeInputFields(e)}  className='fw-semibold'/>
+                                
                             </Form.Group>
                         </Col>
                         
